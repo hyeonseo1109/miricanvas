@@ -1,12 +1,9 @@
 import { style } from "@vanilla-extract/css";
 
-export const pageContainer = style({
-  width: "100%",
-  height: "100%",
-  border: "1px solid #0e0e0e",
-  backgroundColor: "#e9e6e6",
-  padding: "1rem",
+export const resultsContainer = style({
   display: "flex",
+  height: "100%",
+  width: "100%",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
