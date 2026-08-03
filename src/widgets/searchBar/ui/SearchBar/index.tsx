@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getResults } from "@widgets/resultsContainer/model";
 import { AllResultsButton } from "@entities/result/ui/AllResultsButton";
 import { KoreanResultsButton } from "@entities/result/ui/KoreanResultsButton";
+import { copyResult } from "@entities/result/model";
 
 type KeywordMode = "all" | "korean";
 
@@ -26,8 +27,9 @@ export const SearchBar = ({
       keywordMode === "korean"
         ? allKeywords.filter((keyword) => /[가-힣]/.test(keyword))
         : allKeywords;
-
-    setResults(visibleKeywords.slice(0, 25).join(", "));
+    const finalResults = visibleKeywords.slice(0, 25).join(", ");
+    setResults(finalResults);
+    copyResult(finalResults);
   }, [keywordMode, allKeywords, setResults]);
 
   const handleSearch = async () => {
@@ -59,8 +61,16 @@ export const SearchBar = ({
       </div>
 
       <div className={styles.modeButtonContainer}>
-        <AllResultsButton onClick={() => setKeywordMode("all")} />
-        <KoreanResultsButton onClick={() => setKeywordMode("korean")} />
+        <AllResultsButton
+          onClick={() => {
+            setKeywordMode("all");
+          }}
+        />
+        <KoreanResultsButton
+          onClick={() => {
+            setKeywordMode("korean");
+          }}
+        />
       </div>
     </div>
   );
