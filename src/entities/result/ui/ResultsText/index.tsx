@@ -1,3 +1,14 @@
-export const ResultsText = ({ results }: { results: string | null }) => {
-  return <div>{results ? results : <p>결과가 없습니다.</p>}</div>;
+export const ResultsText = ({
+  results,
+  error,
+}: {
+  results: string | null;
+  error: string | null;
+}) => {
+  return (
+    <div>
+      {results}
+      {error && <p>{error}</p>}
+    </div>
+  );
 };

@@ -10,8 +10,10 @@ type KeywordMode = "all" | "korean";
 
 export const SearchBar = ({
   setResults,
+  setError,
 }: {
   setResults: (results: string | null) => void;
+  setError: (error: string | null) => void;
 }) => {
   const [searchValue, setSearchValue] = useState("");
   const [keywordMode, setKeywordMode] = useState<KeywordMode>("korean");
@@ -27,26 +29,64 @@ export const SearchBar = ({
       keywordMode === "korean"
         ? allKeywords.filter((keyword) => /[가-힣]/.test(keyword))
         : allKeywords;
+
     const finalResults = visibleKeywords.slice(0, 25).join(", ");
+
+    if (!finalResults) {
+      setResults(null);
+      setError("표시할 키워드가 없습니다.");
+      return;
+    }
+
+    setError(null);
     setResults(finalResults);
     copyResult(finalResults);
-  }, [keywordMode, allKeywords, setResults]);
+  }, [keywordMode, allKeywords, setResults, setError]);
 
   const handleSearch = async () => {
-    const results = await getResults(searchValue.trim());
+    const trimmedSearchValue = searchValue.trim();
 
-    const keywords = [
-      ...new Set(
-        results?.data.list.flatMap((item: { originKeywords: string }) =>
-          item.originKeywords
-            .split("|")
-            .map((keyword) => keyword.trim())
-            .filter(Boolean),
-        ) ?? [],
-      ),
-    ];
+    if (!trimmedSearchValue) {
+      setError("검색어를 입력해 주세요.");
+      setResults(null);
+      setAllKeywords([]);
+      return;
+    }
 
-    setAllKeywords(keywords as string[]);
+    try {
+      setError(null);
+
+      const results = await getResults(trimmedSearchValue);
+
+      const keywords = [
+        ...new Set(
+          results?.data.list.flatMap((item: { originKeywords?: string }) =>
+            (item.originKeywords ?? "")
+              .split("|")
+              .map((keyword) => keyword.trim())
+              .filter(Boolean),
+          ) ?? [],
+        ),
+      ];
+
+      if (keywords.length === 0) {
+        setError("검색 결과가 없습니다.");
+        setResults(null);
+        setAllKeywords([]);
+        return;
+      }
+
+      setAllKeywords(keywords as string[]);
+    } catch (error) {
+      console.error(error);
+
+      setError(
+        error instanceof Error ? error.message : "검색 중 오류가 발생했습니다.",
+      );
+
+      setResults(null);
+      setAllKeywords([]);
+    }
   };
 
   return (

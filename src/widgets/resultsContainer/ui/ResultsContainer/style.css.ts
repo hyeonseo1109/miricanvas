@@ -10,3 +10,8 @@ export const resultsContainer = style({
   gap: "1rem",
   fontSize: "0.8rem",
 });
+
+export const errorMessage = style({
+  color: "red",
+  fontSize: "0.8rem",
+});
