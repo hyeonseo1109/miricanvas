@@ -11,8 +11,16 @@ export const searchBarContainer = style({
 
 export const modeButtonContainer = style({
   display: "flex",
+  flexDirection: "row",
   alignItems: "center",
   justifyContent: "center",
-  flexDirection: "column",
   gap: "0.5rem",
+});
+
+export const searchContainer = style({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "1rem",
 });

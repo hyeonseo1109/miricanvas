@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "미리캔버스 키워드 추출기",
+  "version": "1.0.0",
+  "description": "검색어에 따른 요소 키워드를 조회하고 복사합니다.",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "키워드 추출기"
+  },
+  "permissions": ["clipboardWrite"],
+  "host_permissions": ["https://api.miricanvas.com/*"]
+}

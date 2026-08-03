@@ -4,6 +4,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
 export default defineConfig({
+  base: "./",
   plugins: [react(), tsconfigPaths(), vanillaExtractPlugin()],
 
   server: {

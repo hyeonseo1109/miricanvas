@@ -90,7 +90,7 @@ export const SearchBar = ({
   };
 
   return (
-    <div>
+    <div className={styles.searchContainer}>
       <div className={styles.searchBarContainer}>
         <SearchInput
           value={searchValue}
