@@ -16,6 +16,7 @@ interface MountedPanel {
 
 class FloatingPanelController {
   private panel: MountedPanel | null = null;
+  private dragCleanup: (() => void) | null = null;
 
   open() {
     if (this.panel?.host.isConnected) return;
@@ -54,10 +55,17 @@ class FloatingPanelController {
 
     const root = createRoot(mountPoint);
     this.panel = { host, root };
-    root.render(<FloatingApp onClose={() => this.close()} />);
+    root.render(
+      <FloatingApp
+        onClose={() => this.close()}
+        onDragStart={(event) => this.startDrag(event.nativeEvent)}
+      />,
+    );
   }
 
   close() {
+    this.stopDragging();
+
     const panel = this.panel;
     this.panel = null;
 
@@ -73,6 +81,55 @@ class FloatingPanelController {
     } else {
       this.open();
     }
+  }
+
+  private startDrag(event: PointerEvent) {
+    const host = this.panel?.host;
+
+    if (!host || event.button !== 0) return;
+
+    event.preventDefault();
+    this.stopDragging();
+
+    const pointerId = event.pointerId;
+    const rect = host.getBoundingClientRect();
+    const offsetX = event.clientX - rect.left;
+    const offsetY = event.clientY - rect.top;
+
+    host.style.left = `${rect.left}px`;
+    host.style.top = `${rect.top}px`;
+    host.style.right = "auto";
+
+    const movePanel = (moveEvent: PointerEvent) => {
+      if (moveEvent.pointerId !== pointerId) return;
+
+      const maxLeft = Math.max(0, window.innerWidth - rect.width);
+      const maxTop = Math.max(0, window.innerHeight - rect.height);
+      const left = Math.min(Math.max(0, moveEvent.clientX - offsetX), maxLeft);
+      const top = Math.min(Math.max(0, moveEvent.clientY - offsetY), maxTop);
+
+      host.style.left = `${left}px`;
+      host.style.top = `${top}px`;
+    };
+
+    const finishDrag = (finishEvent: PointerEvent) => {
+      if (finishEvent.pointerId === pointerId) this.stopDragging();
+    };
+
+    window.addEventListener("pointermove", movePanel);
+    window.addEventListener("pointerup", finishDrag);
+    window.addEventListener("pointercancel", finishDrag);
+
+    this.dragCleanup = () => {
+      window.removeEventListener("pointermove", movePanel);
+      window.removeEventListener("pointerup", finishDrag);
+      window.removeEventListener("pointercancel", finishDrag);
+      this.dragCleanup = null;
+    };
+  }
+
+  private stopDragging() {
+    this.dragCleanup?.();
   }
 }
 

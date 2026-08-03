@@ -20,7 +20,13 @@ export const header = style({
   justifyContent: "space-between",
   borderBottom: "1px solid #c8ccd0",
   background: "#f5f6f7",
+  cursor: "grab",
   fontSize: "14px",
+  touchAction: "none",
+  userSelect: "none",
+  selectors: {
+    "&:active": { cursor: "grabbing" },
+  },
 });
 
 export const closeButton = style({
