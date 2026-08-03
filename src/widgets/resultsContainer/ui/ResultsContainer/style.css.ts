@@ -8,4 +8,5 @@ export const resultsContainer = style({
   alignItems: "center",
   justifyContent: "center",
   gap: "1rem",
+  fontSize: "0.8rem",
 });
