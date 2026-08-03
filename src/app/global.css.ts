@@ -12,17 +12,17 @@ globalStyle("*, *::before, *::after", {
 globalStyle("html, body", {
   margin: 0,
   padding: 0,
-  width: "100%",
-  height: "100%",
+  width: "500px",
+  height: "300px",
 });
 
 globalStyle("body", {
   fontFamily: `system-ui, -apple-system, Segoe UI, Roboto, sans-serif`,
   WebkitFontSmoothing: "antialiased",
   MozOsxFontSmoothing: "grayscale",
-  backgroundColor: "white",
   color: "black",
   lineHeight: 1.5,
+
   // 배경 이미지 설정 시
   // backgroundImage: "url('/background.jpeg')",
   // backgroundSize: "cover",
