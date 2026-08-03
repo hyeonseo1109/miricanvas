@@ -2,11 +2,20 @@
   "manifest_version": 3,
   "name": "미리캔버스 키워드 추출기",
   "version": "1.0.0",
-  "description": "검색어에 따른 요소 키워드를 조회하고 복사합니다.",
+  "description": "검색어를 기반으로 키워드를 추출하고 복사하는 도구",
   "action": {
-    "default_popup": "index.html",
-    "default_title": "키워드 추출기"
+    "default_title": "키워드 추출기 열기"
   },
-  "permissions": ["clipboardWrite"],
-  "host_permissions": ["https://api.miricanvas.com/*"]
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": ["activeTab", "scripting", "clipboardWrite"],
+  "host_permissions": ["https://api.miricanvas.com/*"],
+  "web_accessible_resources": [
+    {
+      "resources": ["content.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }

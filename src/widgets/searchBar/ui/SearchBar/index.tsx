@@ -40,7 +40,9 @@ export const SearchBar = ({
 
     setError(null);
     setResults(finalResults);
-    copyResult(finalResults);
+    void copyResult(finalResults).catch(() => {
+      setError("클립보드에 복사하지 못했습니다. 브라우저 권한을 확인해 주세요.");
+    });
   }, [keywordMode, allKeywords, setResults, setError]);
 
   const handleSearch = async () => {
@@ -60,7 +62,7 @@ export const SearchBar = ({
 
       const keywords = [
         ...new Set(
-          results?.data.list.flatMap((item: { originKeywords?: string }) =>
+          results?.data.list.flatMap((item) =>
             (item.originKeywords ?? "")
               .split("|")
               .map((keyword) => keyword.trim())
