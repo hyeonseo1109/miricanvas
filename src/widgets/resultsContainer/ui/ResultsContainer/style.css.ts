@@ -8,7 +8,7 @@ export const resultsContainer = style({
   flexDirection: "column",
   alignItems: "stretch",
   justifyContent: "flex-start",
-  gap: "0.3rem",
+  gap: "0.15rem",
   overflow: "auto",
   fontSize: "0.58rem",
 });

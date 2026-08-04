@@ -30,7 +30,7 @@ export const resultContent = style({
 });
 
 export const label = style({
-  fontSize: "0.56rem",
+  fontSize: "0.66rem",
   lineHeight: 1.2,
 });
 
@@ -43,8 +43,8 @@ export const keywordText = style({
   overflowY: "hidden",
   whiteSpace: "nowrap",
   color: "#303236",
-  fontSize: "0.55rem",
-  lineHeight: 1.2,
+  fontSize: "0.65rem",
+  lineHeight: 1.3,
 });
 
 export const copyButton = style({
@@ -54,7 +54,7 @@ export const copyButton = style({
   borderRadius: "0.3rem",
   background: "#ffffff",
   cursor: "pointer",
-  fontSize: "0.54rem",
+  fontSize: "0.6rem",
   selectors: {
     "&:hover:not(:disabled)": { background: "#e4e7e9" },
     "&:focus-visible": { outline: "2px solid #4f46e5" },
@@ -64,12 +64,12 @@ export const copyButton = style({
 
 export const error = style({
   color: "#b42318",
-  fontSize: "0.56rem",
+  fontSize: "0.64rem",
 });
 
 export const copyFeedback = style({
   color: "#246b36",
-  fontSize: "0.54rem",
+  fontSize: "0.6rem",
   textAlign: "right",
 });
 

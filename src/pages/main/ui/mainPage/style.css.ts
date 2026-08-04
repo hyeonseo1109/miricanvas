@@ -5,12 +5,12 @@ export const pageContainer = style({
   height: "100%",
   border: "1px solid #0e0e0e",
   backgroundColor: "#e6e8e9",
-  padding: "0.5rem",
+  padding: "0.25rem",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "flex-start",
-  gap: "0.45rem",
+  gap: "0.25rem",
 });
 
 export const title = style({
