@@ -76,7 +76,7 @@ export const copyFeedback = style({
 export const resultDivider = style({
   width: "100%",
   height: "1px",
-  margin: "0.14rem 0",
+  margin: "0.38rem 0",
   flexShrink: 0,
   background: "#7f858a",
 });

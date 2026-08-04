@@ -2,13 +2,10 @@ import { SearchButton, SearchInput } from "@entities/search/ui";
 import * as styles from "./style.css";
 import { useState } from "react";
 import { getResults } from "@widgets/resultsContainer/model";
-import { AllResultsButton } from "@entities/result/ui/AllResultsButton";
-import { KoreanResultsButton } from "@entities/result/ui/KoreanResultsButton";
 import {
   buildKeywordResults,
   copyResult,
   parseKeywords,
-  type KeywordMode,
   type KeywordResults,
 } from "@entities/result/model";
 
@@ -20,11 +17,9 @@ export const SearchBar = ({
   setError: (error: string | null) => void;
 }) => {
   const [searchValue, setSearchValue] = useState("");
-  const [keywordMode, setKeywordMode] = useState<KeywordMode>("korean");
-  const [keywordGroups, setKeywordGroups] = useState<string[][]>([]);
 
-  const showResults = (groups: string[][], mode: KeywordMode) => {
-    const nextResults = buildKeywordResults(groups, mode);
+  const showResults = (groups: string[][]) => {
+    const nextResults = buildKeywordResults(groups);
     const hasVisibleKeywords =
       Boolean(nextResults.combined) || nextResults.elements.some(Boolean);
 
@@ -46,19 +41,12 @@ export const SearchBar = ({
     });
   };
 
-  const changeKeywordMode = (mode: KeywordMode) => {
-    setKeywordMode(mode);
-
-    if (keywordGroups.length > 0) showResults(keywordGroups, mode);
-  };
-
   const handleSearch = async () => {
     const trimmedSearchValue = searchValue.trim();
 
     if (!trimmedSearchValue) {
       setError("검색어를 입력해 주세요.");
       setResults(null);
-      setKeywordGroups([]);
       return;
     }
 
@@ -74,12 +62,10 @@ export const SearchBar = ({
       if (!groups.some((keywords) => keywords.length > 0)) {
         setError("검색 결과가 없습니다.");
         setResults(null);
-        setKeywordGroups([]);
         return;
       }
 
-      setKeywordGroups(groups);
-      showResults(groups, keywordMode);
+      showResults(groups);
     } catch (error) {
       console.error(error);
 
@@ -88,7 +74,6 @@ export const SearchBar = ({
       );
 
       setResults(null);
-      setKeywordGroups([]);
     }
   };
 
@@ -103,18 +88,6 @@ export const SearchBar = ({
         <SearchButton onClick={handleSearch} />
       </div>
 
-      <div className={styles.modeButtonContainer}>
-        <AllResultsButton
-          onClick={() => {
-            changeKeywordMode("all");
-          }}
-        />
-        <KoreanResultsButton
-          onClick={() => {
-            changeKeywordMode("korean");
-          }}
-        />
-      </div>
     </div>
   );
 };

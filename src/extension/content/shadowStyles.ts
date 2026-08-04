@@ -33,8 +33,8 @@ export const shadowStyles = `
   }
 
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 3px;
+    height: 3px;
   }
 
   ::-webkit-scrollbar-thumb {

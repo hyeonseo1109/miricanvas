@@ -1,9 +1,5 @@
 import type { KeywordResults } from "./keywordResults";
 
-export type KeywordMode = "all" | "korean";
-
-const KOREAN_PATTERN = /[가-힣]/;
-
 export const parseKeywords = (keywords?: string) => [
   ...new Set(
     (keywords ?? "")
@@ -15,22 +11,15 @@ export const parseKeywords = (keywords?: string) => [
 
 export const buildKeywordResults = (
   keywordGroups: string[][],
-  mode: KeywordMode,
 ): KeywordResults => {
-  const visibleGroups = keywordGroups.map((keywords) =>
-    mode === "korean"
-      ? keywords.filter((keyword) => KOREAN_PATTERN.test(keyword))
-      : keywords,
-  );
-
   const combined = [
-    ...new Set([...(visibleGroups[0] ?? []), ...(visibleGroups[1] ?? [])]),
+    ...new Set([...(keywordGroups[0] ?? []), ...(keywordGroups[1] ?? [])]),
   ]
     .slice(0, 25)
     .join(", ");
 
   return {
     combined,
-    elements: visibleGroups.map((keywords) => keywords.join(", ")),
+    elements: keywordGroups.map((keywords) => keywords.join(", ")),
   };
 };
