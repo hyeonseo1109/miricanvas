@@ -3,7 +3,8 @@ import { style } from "@vanilla-extract/css";
 export const panel = style({
   display: "flex",
   width: "100%",
-  height: "100%",
+  height: "auto",
+  maxHeight: "calc(100vh - 32px)",
   flexDirection: "column",
   overflow: "hidden",
   border: "1px solid #b8bdc2",
@@ -48,6 +49,6 @@ export const closeButton = style({
 
 export const content = style({
   minHeight: 0,
-  flex: 1,
+  flex: "0 1 auto",
   overflow: "auto",
 });

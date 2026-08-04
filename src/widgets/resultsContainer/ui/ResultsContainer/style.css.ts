@@ -4,7 +4,7 @@ export const resultsContainer = style({
   display: "flex",
   minHeight: 0,
   width: "100%",
-  flex: 1,
+  flex: "0 1 auto",
   flexDirection: "column",
   alignItems: "stretch",
   justifyContent: "flex-start",

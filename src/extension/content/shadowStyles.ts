@@ -10,7 +10,8 @@ export const shadowStyles = `
 
   .miricanvas-floating-root {
     width: 100%;
-    height: 100%;
+    height: auto;
+    max-height: calc(100vh - 32px);
     color: #0e0e0e;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     font-size: 16px;

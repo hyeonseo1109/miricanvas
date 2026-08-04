@@ -28,10 +28,11 @@ class FloatingPanelController {
     host.id = HOST_ID;
     Object.assign(host.style, {
       position: "fixed",
-      top: "24px",
-      right: "24px",
-      width: "min(500px, calc(100vw - 48px))",
-      height: "min(300px, calc(100vh - 48px))",
+      top: "16px",
+      right: "16px",
+      width: "min(500px, calc(100vw - 32px))",
+      height: "auto",
+      maxHeight: "calc(100vh - 32px)",
       zIndex: "2147483647",
       margin: "0",
       padding: "0",
