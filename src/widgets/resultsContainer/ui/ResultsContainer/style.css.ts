@@ -2,16 +2,18 @@ import { style } from "@vanilla-extract/css";
 
 export const resultsContainer = style({
   display: "flex",
-  height: "100%",
+  minHeight: 0,
   width: "100%",
+  flex: 1,
   flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: "1rem",
-  fontSize: "0.8rem",
+  alignItems: "stretch",
+  justifyContent: "flex-start",
+  gap: "0.3rem",
+  overflow: "auto",
+  fontSize: "0.58rem",
 });
 
 export const errorMessage = style({
   color: "red",
-  fontSize: "0.8rem",
+  fontSize: "0.58rem",
 });

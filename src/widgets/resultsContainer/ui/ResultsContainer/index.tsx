@@ -1,11 +1,12 @@
 import * as styles from "./style.css";
 import { ResultsText } from "@entities/result/ui/ResultsText";
+import type { KeywordResults } from "@entities/result/model";
 
 export const ResultsContainer = ({
   results,
   error,
 }: {
-  results: string | null;
+  results: KeywordResults | null;
   error: string | null;
 }) => {
   return (

@@ -14,14 +14,14 @@ export const panel = style({
 
 export const header = style({
   display: "flex",
-  minHeight: "42px",
-  padding: "0 10px 0 14px",
+  minHeight: "34px",
+  padding: "0 8px 0 10px",
   alignItems: "center",
   justifyContent: "space-between",
   borderBottom: "1px solid #c8ccd0",
   background: "#f5f6f7",
   cursor: "grab",
-  fontSize: "14px",
+  fontSize: "12px",
   touchAction: "none",
   userSelect: "none",
   selectors: {
@@ -31,14 +31,14 @@ export const header = style({
 
 export const closeButton = style({
   display: "flex",
-  width: "28px",
-  height: "28px",
+  width: "24px",
+  height: "24px",
   alignItems: "center",
   justifyContent: "center",
   borderRadius: "6px",
   color: "#292929",
   cursor: "pointer",
-  fontSize: "22px",
+  fontSize: "18px",
   lineHeight: 1,
   selectors: {
     "&:hover": { background: "#e1e3e5" },
