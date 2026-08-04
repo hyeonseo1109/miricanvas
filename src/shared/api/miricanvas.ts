@@ -2,7 +2,7 @@ const MIRICANVAS_API_URL =
   "https://api.miricanvas.com/designresource/api/d/element";
 
 export interface MiricanvasElement {
-  originKeywords?: string;
+  keywords?: string;
 }
 
 export interface MiricanvasResponse {
